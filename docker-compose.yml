@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16
+    container_name: m223_db
+    environment:
+      POSTGRES_DB: m223
+      POSTGRES_USER: m223
+      POSTGRES_PASSWORD: m223
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend/223_User_Profile_Backend
+    container_name: m223_backend
+    environment:
+      # Backend muss das so erwarten; sonst anpassen
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: m223
+      DB_USER: m223
+      DB_PASSWORD: m223
+      # Optional:
+      # NODE_ENV: development
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend/223_User_Profile_Frontend
+    container_name: m223_frontend
+    environment:
+      # Frontend muss das so nutzen; sonst anpassen
+      VITE_API_URL: "http://localhost:8080"
+      # oder z.B. NEXT_PUBLIC_API_URL: "http://localhost:8080"
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+      # falls Next.js: "3000:3000"
+
+volumes:
+  db_data:
