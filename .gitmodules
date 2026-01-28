@@ -1,0 +1,6 @@
+[submodule "frontend/223_User_Profile_Frontend"]
+	path = frontend/223_User_Profile_Frontend
+	url = https://github.com/BusyMoreno/223_User_Profile_Frontend.git
+[submodule "backend/223_User_Profile_Backend"]
+	path = backend/223_User_Profile_Backend
+	url = https://github.com/BusyMoreno/223_User_Profile_Backend.git
