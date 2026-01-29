@@ -7,7 +7,7 @@ services:
     image: docker223-frontend
     restart: unless-stopped
     ports:
-      - "8904:8080"
+      - "8904:80"
     depends_on:
       - backend
 
