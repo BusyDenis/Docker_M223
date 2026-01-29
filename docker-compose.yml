@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     image: docker223-backend
     ports:
-      - "8080:8080"
+      - "8905:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
@@ -33,6 +33,6 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - "8904:5432"
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
