@@ -7,7 +7,7 @@ services:
     image: docker223-frontend
     restart: unless-stopped
     ports:
-      - "3000:80"
+      - "8904:8080"
     depends_on:
       - backend
  
@@ -37,7 +37,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - "8904:5432"
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 3s
