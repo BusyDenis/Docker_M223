@@ -5,6 +5,7 @@ services:
       context: ./frontend/223_User_Profile_Frontend
       dockerfile: Dockerfile
     image: docker223-frontend
+    restart: unless-stopped
     ports:
       - "3000:80"
     depends_on:
@@ -16,6 +17,7 @@ services:
       context: ./backend/223_User_Profile_Backend
       dockerfile: Dockerfile
     image: docker223-backend
+    restart: unless-stopped
     ports:
       - "8905:8080"
     environment:
@@ -23,16 +25,24 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:
-      - db
+      db:
+        condition: service_healthy
  
   db:
     image: postgres:15-alpine
     container_name: denis_db
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
       - "8904:5432"
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    # Only enable if db/init.sql exists as a FILE (not a directory)
+    # volumes:
+    #   - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
