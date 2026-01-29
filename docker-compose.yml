@@ -23,7 +23,8 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:
-      - db
+      db:
+        condition: service_healthy
  
   db:
     image: postgres:15-alpine
@@ -34,5 +35,11 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "8904:5432"
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    # Optional: add init script - ensure db/init.sql is a FILE, not a directory
+    # volumes:
+    #   - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
