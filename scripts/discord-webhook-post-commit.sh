@@ -10,7 +10,7 @@
 DISCORD_WEBHOOK_URL="${DISCORD_WEBHOOK_URL:-https://discord.com/api/webhooks/1466780880918806672/kT8a8nNWgbjWDa8Dp3FWOIQBaLLSjypGKc0WIZDuA1kgXeli9K934S1y7vHVxUo0-vbi}"
 DISCORD_LINK_URL="${DISCORD_LINK_URL:-https://denis.dev.noseryoung.ch/}"
 DISCORD_IMAGE_URL="${DISCORD_IMAGE_URL:-https://media.tenor.com/jpWZpyc71f4AAAAm/goofy-ahh-pictures-funny.webp}"
-DISCORD_CUSTOM_MESSAGE="${DISCORD_CUSTOM_MESSAGE:-Der königliche Sigma hat ein neues Commit gepushed}"
+DISCORD_CUSTOM_MESSAGE="${DISCORD_CUSTOM_MESSAGE:-Der königliche Sigma hat ein neuen Commit gepushed}"
 
 COMMIT_MSG=$(git log -1 --pretty=%B)
 COMMIT_AUTHOR=$(git log -1 --pretty=%an)
